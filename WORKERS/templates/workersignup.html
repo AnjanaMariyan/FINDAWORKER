@@ -1,0 +1,62 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/Wsignup.css' %}">    
+
+
+</head>
+<body>
+
+    <div class="container" style="padding: 17%;color: black;">
+         <h1>WORKER REGISTRATION</h1>
+
+            <form action="" method="post">
+
+                {% csrf_token %}
+            
+                    <div style="margin-inline-start: -1%;">
+                    Username : <input type="text" name="worker_name" ><br><br>
+                    </div>
+                    
+                    <div style="margin-inline-start: 1%;">
+                    Email id : <input type="email" name="email_id"><br><br>
+                    </div>
+                    
+                    <div style="margin-inline-start: -5%;">
+                    Phone number : <input type="text" name="phone_number"><br><br>
+                    </div>
+                    
+                    
+                    <div style="margin-inline-start: 1%;">
+                            Address : <input type="text" name="address"><br><br>
+                            
+                    </div>
+                    
+                    
+                    <div style="margin-inline-start: 3%;">
+                    Skills : <input type="text" name="skills"><br><br>
+                    </div>
+                    
+                    <div style="margin-inline-start: -8%;">
+                    Work experience : <input type="number" name="experience"><br><br>
+                    </div>
+                    
+
+                    <div style="margin-inline-start: 0%;">
+                        Password : <input type="password" name="password"><br><br>
+                    </div>
+                    
+                    
+                    <div style="margin-inline-start: 12%;">
+                    <input type="submit" value="Submit">
+                    </div>
+             
+    </div>
+
+</body>
+</html>

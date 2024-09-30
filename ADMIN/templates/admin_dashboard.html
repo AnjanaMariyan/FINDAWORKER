@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Dashboard</title>
+</head>
+<body>
+    <h1>Admin Dashboard - Approve Workers</h1>
+    <table>
+        <tr>
+            <th>Worker Name</th>
+            <th>Email</th>
+            <th>Phone Number</th>
+            <th>Skills</th>
+            <th>Experience</th>
+            <th>Action</th>
+        </tr>
+        {% for worker in workers %}
+        <tr>
+            <td>{{ worker.worker_name }}</td>
+            <td>{{ worker.email_id }}</td>
+            <td>{{ worker.phone_number }}</td>
+            <td>{{ worker.skills }}</td>
+            <td>{{ worker.experience }} years</td>
+            <td>
+                <a href="{% url 'approve_worker' worker.id %}">Approve</a>
+                <a href="{% url 'reject_worker' worker.id %}">Reject</a>
+            </td>
+        </tr>
+        {% endfor %}     
+    </table>
+</body>
+</html>

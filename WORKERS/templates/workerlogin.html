@@ -1,0 +1,35 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+</head>
+<body>
+
+    <div class="container" style="color:black; padding-left: 663px; margin: 16%;">
+        <h1> WORKER'S LOGIN</h1>
+
+        <form action="" method="post">
+
+            {% csrf_token %}
+
+            <div style="margin-inline-start: -1%;">
+            Username : <input type="text" name="email_id" ><br><br>
+            </div>
+
+        <div style="margin-inline-start: -1%;">
+            Password : <input type="password" name="password"><br><br>
+            </div>
+
+            <div style="margin-inline-start: 12%;">
+            <input type="submit" value="Submit">
+            </div>
+
+        </form>
+
+    </div>
+</body>
+</html>

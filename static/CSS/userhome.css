@@ -1,0 +1,32 @@
+
+.container {
+    text-align: right;
+}
+
+.image-container {
+    
+    justify-content: left;
+}
+
+.image-container img {
+    width: 459px; /* Adjust size as needed */
+    height: auto;
+    margin: 10px; /* Adjust margin as needed */
+}
+
+h1 {
+    font-size: 48px;
+    margin-top: -689px;
+    text-align: left;
+    color: rgb(255, 0, 93);
+}
+
+p{
+    color: rgb(52, 17, 17);
+    text-align: justify;
+}
+
+h3 {
+    text-align: left;
+    color: black;
+}
