@@ -8,7 +8,6 @@ class Worker(AbstractUser):
     address = models.CharField(max_length=255, default='', blank=True)
     skills = models.CharField(max_length=255)
     experience = models.IntegerField(default=0)  # Number of years of experience
-    password = models.CharField(max_length=20)
     is_approved = models.BooleanField(default=False)  # Approval by admin
 
     groups = models.ManyToManyField(
@@ -25,11 +24,3 @@ class Worker(AbstractUser):
     def __str__(self):
         return self.worker_name
     
-
-class WorkerProfile(models.Model):
-    worker = models.OneToOneField(Worker, on_delete=models.CASCADE)
-    description = models.TextField()
-    availability = models.CharField(max_length=255)
-
-    def __str__(self):
-        return f"{self.worker.worker_name}'s Profile"

@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
-from .models import Worker, WorkerProfile
+from WORKERS.models import Worker
 
 
 
@@ -9,46 +9,52 @@ def worker_signup(request):
     if request.method == 'POST':
         worker_name = request.POST.get('worker_name')
         email_id = request.POST.get('email_id')
-        phone_number = request.POST.get('phone_number')
-        address = request.POST.get('address')
+        phone_number = request.POST.get('phone_number', '')
+        address = request.POST.get('address', '')
         skills = request.POST.get('skills')
-        experience = request.POST.get('experience')
+        experience = request.POST.get('experience', 0)
         password = request.POST.get('password')
+
+
+        # Validate the fields before proceeding
+        if not (worker_name and email_id and password and skills):
+            messages.error(request, 'Please fill in all the required fields.')
+            return redirect('worker_reg')
 
         # Check if email_id is already in use
         if Worker.objects.filter(email_id=email_id).exists():
+
             messages.error(request, 'A worker with that email already exists.')
             return redirect('worker_reg')
 
         try:
-            # Create the worker
+            # Create the worker account
             worker = Worker.objects.create_user(
                 username=email_id,
-                email=email_id,
+                email_id=email_id,
                 password=password
             )
             worker.worker_name = worker_name
             worker.phone_number = phone_number
             worker.address = address
             worker.skills = skills
-            worker.experience = experience
+            worker.experience = int(experience)  # Convert to integer
+            worker.is_approved = False  # Set is_approved to False by default (admin approval needed)
             worker.save()
 
-            # Create worker profile
-            description = request.POST.get('description', '')
-            availability = request.POST.get('availability', '')
-            worker_profile = WorkerProfile(worker=worker, description=description, availability=availability)
-            worker_profile.save()
+            # Success message
+            # If registration is successful
+            messages.success(request, 'Registration successful! Please wait for admin approval.')
+            return redirect('worker_login')  # Should redirect here after POST
 
-            messages.success(request, 'Registration successful! Please wait for approval.')
-            return redirect('worker_login')  # Redirect to login after signup
 
         except Exception as e:
-            # Log the error for debugging
-            messages.error(request, f'Error: {e}')
+            # Handle the error and provide feedback to the user
+            messages.error(request, f'Error occurred: {str(e)}')
             return redirect('worker_reg')
 
     return render(request, 'workersignup.html')
+
 
 
 
